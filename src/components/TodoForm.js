@@ -23,10 +23,19 @@ function TodoForm({ todo, showModal, setShowModal ,setUpdateData,updateData}) {
   // //////////////////////////to submit form //////////////////////
 
   const handleSubmit = () => {
+    // alert(formData.status)
+    if(formData.title==""){
+      alert("Todo  is empty")
+    }
+    else if(formData.status==""){
+      alert("Status is empty")
+    
+  }else{
     dispatch({ type: ADD_TODO, payload: { id: Math.random(), ...formData } });
     resetFormData()
-    setShowModal(false)
-  };
+    setShowModal(false)}
+  }
+ 
 ///////////////////////Reset Formdata////////////////////
 const resetFormData=()=>{
   setFormData(initialState)
@@ -83,16 +92,16 @@ const resetFormData=()=>{
                       value={title}
                       type="text"
                       name="name"
-
+                      
                       placeholder={todo?"Update Todo":"Add Todo"}
-                      className="p-3 outline  rounded"
+                      className="p-3 outline  rounded required:"
                       onChange={(e) => handleInputChange(e, "title")}
                     />
                     <select
                       id="status"
                       value={status}
                       onChange={(e) => handleInputChange(e, "status")}
-                      className="p-3 outline  rounded"
+                      className="p-3 outline  rounded required"
                     >
                       <option value="">Select Status</option>
                       {STATUS.map((st) => (
